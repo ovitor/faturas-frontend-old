@@ -7,18 +7,20 @@ import base from './modules/base'
 
 // external modules
 import auth from '@/components/Auth/store/auth'
+import dashboard from '@/components/Faturas/Dashboard/store/dashboard'
 
 Vue.use(Vuex)
 
 export const store = new Vuex.Store({
   modules: {
     base,
-    auth
+    auth,
+    dashboard
   },
 
   state: {
-    app_title: 'Vue.js Base Project',
-    app_subtitle: 'Simple...',
+    app_title: 'Faturas',
+    app_subtitle: 'Simplicidade',
     loading: false
   },
 

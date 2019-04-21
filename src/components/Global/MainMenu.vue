@@ -2,7 +2,7 @@
   <nav class="navbar is-fixed-top is-transparent">
     <div class="navbar-brand">
       <a class="navbar-item" href="#">
-        <span>Logo</span>
+        <span>Faturas</span>
       </a>
       <div class="navbar-burger burger" data-target="menu">
         <span></span>
@@ -14,25 +14,18 @@
     <div id="menu" class="navbar-menu">
       <div class="navbar-start">
         <router-link class="navbar-item" :to="{ name: 'index' }">
-          Página Inicial
+          Dashboard
         </router-link>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">
-            Base
+            Produtos
           </a>
           <div class="navbar-dropdown is-boxed">
             <a class="navbar-item" href="#">
-              Link 1
+              Listar
             </a>
             <a class="navbar-item" href="#">
-              Link 2
-            </a>
-            <hr class="navbar-divider">
-            <a class="navbar-item" href="#">
-              Link 3
-            </a>
-            <a class="navbar-item" href="#">
-              Link 4
+              Cadastrar
             </a>
           </div>
         </div>
@@ -48,7 +41,7 @@
                 icon="account"
                 size="is-small">
               </b-icon>
-              <span>Login</span>
+              <span>Acessar</span>
             </router-link>
           </p>
         </div> <!-- /field -->

@@ -1,8 +1,8 @@
 export const config = {
-  apiKey: 'AIzaSyA2VY919zGa-NDhkuz0fnWAnnMycgKAYHY',
-  authDomain: 'vuejs-base.firebaseapp.com',
-  databaseURL: 'https://vuejs-base.firebaseio.com',
-  projectId: 'vuejs-base',
+  apiKey: 'AIzaSyCCC-pcAeY8u-u6N-yRGBvk1MNBL3MGSlo',
+  authDomain: 'faturas-cc806.firebaseapp.com',
+  databaseURL: 'https://faturas-cc806.firebaseio.com',
+  projectId: 'faturas-cc806',
   storageBucket: '',
-  messagingSenderId: '102389013193'
+  messagingSenderId: ''
 }

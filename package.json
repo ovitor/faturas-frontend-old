@@ -1,7 +1,7 @@
 {
-  "name": "vuejs-base",
-  "version": "1.0.0",
-  "description": "Selling things in a fancy way",
+  "name": "faturas",
+  "version": "0.0.1",
+  "description": "Dashboard to handle invoices",
   "author": "Vitor Carvalho <vitorcarvalhoml@gmail.com>",
   "private": true,
   "scripts": {
