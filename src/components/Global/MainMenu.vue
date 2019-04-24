@@ -16,6 +16,9 @@
         <router-link class="navbar-item" :to="{ name: 'index' }">
           Dashboard
         </router-link>
+        <router-link class="navbar-item" :to="{ name: 'invoice' }">
+          Faturas
+        </router-link>
         <div class="navbar-item has-dropdown is-hoverable">
           <a class="navbar-link" href="#">
             Produtos

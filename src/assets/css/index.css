@@ -2,3 +2,8 @@
 #index {
   margin: 0 auto;
 }
+
+/* invoice show page */
+#invoice-show {
+  margin: 80px auto;
+}
