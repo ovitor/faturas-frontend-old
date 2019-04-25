@@ -1,0 +1,9 @@
+/* print media */
+@media print {
+  table {
+    height: 100%;
+  }
+  #footer {
+    display: none;
+  }
+}

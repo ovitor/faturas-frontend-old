@@ -23,6 +23,7 @@ Vue.use(Buefy)
 require('./assets/sass/app.scss')
 require('./assets/css/index.css')
 require('./assets/css/login.css')
+require('./assets/css/print.css')
 
 // Using local components
 Vue.component('main-menu', MainMenu)
