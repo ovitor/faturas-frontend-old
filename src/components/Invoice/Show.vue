@@ -49,8 +49,8 @@
 					</div>
 					<div class="columns">
 						<div class="column is-12">
-							<div class="table">
-                <b-table :data="data" :columns="columns" ref="table"></b-table>
+							<div class="table" ref="table">
+                <b-table :data="data" :columns="columns"></b-table>
 							</div>
 						</div>
 					</div>
@@ -83,7 +83,7 @@
       </div> <!-- container -->
       <div id="footer" class="box is-shadowless">
         <div class="box-footer has-text-right">
-          <b-button type="is-danger">Negar</b-button>
+          <b-button type="is-danger" @click="pdfVariables">Negar</b-button>
           <b-button type="is-primary" @click="pdfPrint">Imprimir</b-button>
           <b-button type="is-success">Enviar por e-mail</b-button>
         </div> <!-- box-footer -->
@@ -95,7 +95,8 @@
 
 <script>
 import jsPDF from 'jspdf'
-// import html2canvas from 'html2canvas'
+import 'jspdf-autotable'
+import html2canvas from 'html2canvas'
 
 export default {
   name: 'InvoiceShow',
@@ -124,22 +125,84 @@ export default {
         { field: 'unit_value', label: 'Valor Unitário', numeric: false },
         { field: 'value', label: 'Valor', numeric: false }
       ],
-      pdfColumns: ['Item', 'Identificação', 'Descrição', 'Quantidade', 'Valor Unitário', 'Valor']
+      pdfColumns: [],
+      pdfData: []
     }
   },
   methods: {
+    pdfVariables () {
+      if (this.pdfColumns.length !== 0) return;
+      for (let e in this.columns) {
+        if (e == this.columns.length) break;
+        this.pdfColumns.push(this.columns[e]['label'])
+      }
+      for (let e in this.data) {
+        var aux = [
+          this.data[e]['item'],
+          this.data[e]['identification'],
+          this.data[e]['description'],
+          this.data[e]['quantity'],
+          this.data[e]['unit_value'],
+          this.data[e]['value']
+        ]
+        this.pdfData.push(aux)
+      }
+    },
     pdfPrint () {
-      console.log('fui clicado')
+      this.pdfVariables()
       const doc = new jsPDF({
         orientation: 'portrait'
       })
 
-      doc.text('fatura', 10, 10)
-      const tableHTML = this.$refs.table.innerHTML
-      doc.fromHTML(tableHTML, 20, 20)
-      const results = this.$refs.results.innerHTML
-      doc.fromHTML(results, 30, 30)
-      doc.save('a4.pdf')
+      var pageSize = doc.internal.pageSize;
+      var pageWidth = pageSize.width ? pageSize.width : pageSize.getWidth();
+
+      doc.setFontSize(18);
+      doc.text('Faturas', 14, 22);
+
+      // header
+      doc.setFontSize(11);
+      doc.setTextColor(100);
+      doc.text('Gerada em: 03/03/2019', pageWidth - 55, 22);
+      doc.text('Fatura #301', pageWidth - 35, 27);
+      doc.text('Identificação do pedido: 11', pageWidth - 60, 32);
+
+      var text = doc.splitTextToSize('Proin in tortor consequat, dapibus erat vitae, tincidunt ipsum.', pageWidth - 35, {});
+
+      var provider = 'De\nFoo Company\nRua Foo, 32\nFortaleza, CE - 60.115-191\nTelefone: (85) 3231 0925\nE-mail: contact@foo.com'
+      var client = 'Para\nACME LTDA\nRua ACME, 1703\nFortaleza, CE - 60.140-320\nTelefone: (85) 3401 2201\nResponsável: Fulano Acme (e-mail: fulano@acme.br)'
+      var provider_text= doc.splitTextToSize(provider,  pageWidth - 35, {})
+      var client_text = doc.splitTextToSize(client, pageWidth - 35, {})
+
+      doc.text(provider_text, 14, 35)
+      doc.text(client_text, 14, 65)
+
+      doc.autoTable({
+        head: [this.pdfColumns],
+        body: this.pdfData,
+        startY: 100
+      })
+
+      doc.text(text, 14, doc.autoTable.previous.finalY + 10);
+
+      doc.output("dataurlnewwindow");
+      // doc.save('a4.pdf')
+
+      // var elem = document.getElementsByClassName('box-content')[0]
+      // html2canvas(document.body)
+      //  .then(function (canvas) {
+      //    var img = canvas.toDataURL("image/png")
+      //    doc.addImage(img, "JPEG", 20, 20)
+      //    doc.save('a4.pdf')
+      //  })
+    }
+
+      // doc.text('fatura', 10, 10)
+      // const tableHTML = this.$refs.table.innerHTML
+      // doc.fromHTML(tableHTML, 20, 20, { width: 800 })
+      // const results = this.$refs.results.innerHTML
+      // doc.fromHTML(results, 30, 30)
+      // doc.save('a4.pdf')
 
       // window.print()
       // const doc = new jsPDF({
@@ -149,7 +212,7 @@ export default {
       // const contentHtml = this.$refs.pdf.innerHTML
       // doc.table(10, 10, this.data, this.pdfColumns)
       // doc.save('sample.pdf')
-    }
+    // }
   }
 }
 </script>
