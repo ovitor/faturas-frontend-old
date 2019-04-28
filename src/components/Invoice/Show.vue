@@ -27,11 +27,8 @@
 						</div>
 						<div class="column is-5">
 							<div class="content has-text-right">
-					      <b>Fatura nº 301</b><br>
-					      <br>
+					      <b>Fatura #301</b><br>
 					      <b>Identificação do pedido:</b> 10<br>
-					      <b>Data de pagamento:</b> 29/05/2019<br>
-					      <b>Account:</b> 96-34562-2
 					    </div>
 						</div>
 					</div>
@@ -64,9 +61,6 @@
 							<ul class="list-group">
 				        <li class="list-group-item">
 				          <b>Subtotal:</b> <p class="is-pulled-right">R$ 554,80</p>
-				        </li>
-				        <li class="list-group-item">
-				          <b>ISS (5%):</b> <p class="is-pulled-right">R$ 27,74</p>
 				        </li>
 				        <li class="list-group-item">
 				          <b>Taxa de entrega:</b> <p class="is-pulled-right">R$ 0,00</p>
@@ -112,10 +106,10 @@ export default {
         { 'item': 7, 'identification': '017', 'description': 'Lorem ipsum dolor', 'quantity': '8', 'unit_value': '18,00', 'value': '144,00' },
         { 'item': 8, 'identification': '001', 'description': 'Consectetur adipiscing elit', 'quantity': '10', 'unit_value': '31,00', 'value': '310,00' },
         { 'item': 9, 'identification': '024', 'description': 'Lorem ipsum dolor sit adipiscing elit', 'quantity': '12', 'unit_value': '20,40', 'value': '244,80' },
-        { 'item': 10, 'identification': '008', 'description': 'Dolor sit adipiscing elit Lorem ipsum', 'quantity': '22', 'unit_value': '10,00', 'value': '220,00' },
-        { 'item': 11, 'identification': '007', 'description': 'Lorem ipsum dolor', 'quantity': '8', 'unit_value': '18,00', 'value': '144,00' },
-        { 'item': 12, 'identification': '023', 'description': 'Adipiscing elit ipsum', 'quantity': '14', 'unit_value': '24,50', 'value': '343,00' },
-        { 'item': 13, 'identification': '038', 'description': 'Elit Lorem ipsum Adipiscing elit ipsum', 'quantity': '10', 'unit_value': '10,00', 'value': '100,00' }
+        // { 'item': 10, 'identification': '008', 'description': 'Dolor sit adipiscing elit Lorem ipsum', 'quantity': '22', 'unit_value': '10,00', 'value': '220,00' },
+        // { 'item': 11, 'identification': '007', 'description': 'Lorem ipsum dolor', 'quantity': '8', 'unit_value': '18,00', 'value': '144,00' },
+        // { 'item': 12, 'identification': '023', 'description': 'Adipiscing elit ipsum', 'quantity': '14', 'unit_value': '24,50', 'value': '343,00' },
+        // { 'item': 13, 'identification': '038', 'description': 'Elit Lorem ipsum Adipiscing elit ipsum', 'quantity': '10', 'unit_value': '10,00', 'value': '100,00' }
       ],
       columns: [
         { field: 'item', label: 'Item', numeric: true},
@@ -160,30 +154,46 @@ export default {
       doc.setFontSize(18);
       doc.text('Faturas', 14, 22);
 
+      var generalInfo = 'Gerada em 28/04/2019\nFatura #301\nNúmero do pedido: 12'
+      var provider = 'De\nFoo Company\nRua Foo, 32\nFortaleza, CE - 60.115-191\nTelefone: (85) 3231 0925\nE-mail: contact@foo.com'
+      var client = 'Para\nACME LTDA\nRua ACME, 1703\nFortaleza, CE - 60.140-320\nTelefone: (85) 3401 2201\nResponsável: Fulano Acme (e-mail: fulano@acme.br)'
+      var valueInfo = 'Subtotal: R$ 2.015,00\nTaxa de entrega: R$ 0,00\n\nTotal: R$ 2.015,00'
+
       // header
       doc.setFontSize(11);
       doc.setTextColor(100);
-      doc.text('Gerada em: 03/03/2019', pageWidth - 55, 22);
-      doc.text('Fatura #301', pageWidth - 35, 27);
-      doc.text('Identificação do pedido: 11', pageWidth - 60, 32);
+      doc.setFontStyle('bold');
 
-      var text = doc.splitTextToSize('Proin in tortor consequat, dapibus erat vitae, tincidunt ipsum.', pageWidth - 35, {});
+      doc.text(generalInfo, pageWidth - 14, 22, 'right');
 
-      var provider = 'De\nFoo Company\nRua Foo, 32\nFortaleza, CE - 60.115-191\nTelefone: (85) 3231 0925\nE-mail: contact@foo.com'
-      var client = 'Para\nACME LTDA\nRua ACME, 1703\nFortaleza, CE - 60.140-320\nTelefone: (85) 3401 2201\nResponsável: Fulano Acme (e-mail: fulano@acme.br)'
+      doc.setFontStyle('normal');
+
       var provider_text= doc.splitTextToSize(provider,  pageWidth - 35, {})
       var client_text = doc.splitTextToSize(client, pageWidth - 35, {})
+      var valueInfo_text= doc.splitTextToSize(valueInfo, pageWidth - 35, {})
 
       doc.text(provider_text, 14, 35)
       doc.text(client_text, 14, 65)
 
+      doc.setFontSize(18);
+      doc.text('Relação de Itens', pageWidth - (pageWidth / 2), 100, 'center')
+
       doc.autoTable({
         head: [this.pdfColumns],
         body: this.pdfData,
-        startY: 100
+        startY: 105,
+        theme: 'plain',
+        headStyles: {
+          lineWidth: 0.2
+        },
+        bodyStyles: {
+          lineWidth: 0.1
+        }
       })
 
-      doc.text(text, 14, doc.autoTable.previous.finalY + 10);
+      doc.setFontSize(11);
+      doc.setTextColor(100);
+      doc.text(valueInfo_text, pageWidth - 14, doc.autoTable.previous.finalY + 10, 'right');
 
       doc.output("dataurlnewwindow");
       // doc.save('a4.pdf')
@@ -196,18 +206,6 @@ export default {
       //    doc.save('a4.pdf')
       //  })
     }
-
-      // doc.text('fatura', 10, 10)
-      // const tableHTML = this.$refs.table.innerHTML
-      // doc.fromHTML(tableHTML, 20, 20, { width: 800 })
-      // const results = this.$refs.results.innerHTML
-      // doc.fromHTML(results, 30, 30)
-      // doc.save('a4.pdf')
-
-      // window.print()
-      // const doc = new jsPDF({
-      //   orientation: 'portrait'
-      // })
 
       // const contentHtml = this.$refs.pdf.innerHTML
       // doc.table(10, 10, this.data, this.pdfColumns)
