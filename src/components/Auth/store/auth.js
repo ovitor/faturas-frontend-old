@@ -26,7 +26,7 @@ const getters = {
 
 // actions
 const actions = {
-  userSignUp ({commit, dispatch}, payload) {
+  userSignUp ({ commit, dispatch }, payload) {
     commit('setLoading', true)
     firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
       .then(() => {
@@ -52,7 +52,7 @@ const actions = {
         commit('setLoading', false)
       })
   },
-  userSignIn ({commit, dispatch}, payload) {
+  userSignIn ({ commit, dispatch }, payload) {
     commit('setLoading', true)
     firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
       .then(firebaseUser => {
@@ -80,14 +80,14 @@ const actions = {
         commit('setLoading', false)
       })
   },
-  userSignInWithGoogle ({commit}) {
+  userSignInWithGoogle ({ commit }) {
     commit('setLoading', true)
     var provider = new firebase.auth.GoogleAuthProvider()
     firebase.auth().signInWithPopup(provider)
       .then(function (result) {
         // var token = result.credential.accessToken
         var user = result.user
-        commit('setUser', {email: user.email, displayName: user.displayName, photoURL: user.photoURL})
+        commit('setUser', { email: user.email, displayName: user.displayName, photoURL: user.photoURL })
         commit('setLoading', false)
         commit('setError', null)
 
@@ -117,7 +117,7 @@ const actions = {
         // console.log(credential)
       })
   },
-  userSignInWithFacebook ({commit}) {
+  userSignInWithFacebook ({ commit }) {
     commit('setLoading', true)
     var provider = new firebase.auth.FacebookAuthProvider()
     provider.addScope('user_birthday')
@@ -129,7 +129,7 @@ const actions = {
         // This gives you a Facebook Access Token.
         // var token = result.credential.accessToken
         var user = result.user
-        commit('setUser', {email: user.email, displayName: user.displayName, photoURL: user.photoURL})
+        commit('setUser', { email: user.email, displayName: user.displayName, photoURL: user.photoURL })
         commit('setLoading', false)
         commit('setError', null)
 
@@ -145,7 +145,7 @@ const actions = {
         router.push('/')
       })
   },
-  userSignInWithTwitter ({commit}) {
+  userSignInWithTwitter ({ commit }) {
     commit('setLoading', true)
     var provider = new firebase.auth.TwitterAuthProvider()
     firebase.auth().signInWithPopup(provider)
@@ -153,7 +153,7 @@ const actions = {
         // var token = result.credential.accessToken
         // var secret = result.credential.secret
         var user = result.user
-        commit('setUser', {email: user.email, displayName: user.displayName, photoURL: user.photoURL})
+        commit('setUser', { email: user.email, displayName: user.displayName, photoURL: user.photoURL })
         commit('setLoading', false)
         commit('setError', null)
 
@@ -180,7 +180,7 @@ const actions = {
         // var credential = error.credential
       })
   },
-  autoSignIn ({commit}, payload) {
+  autoSignIn ({ commit }, payload) {
     const user = {
       email: payload.email,
       displayName: payload.displayName,
@@ -198,13 +198,13 @@ const actions = {
 
     commit('setUser', user)
   },
-  userSignOut ({commit}) {
+  userSignOut ({ commit }) {
     firebase.auth().signOut()
     commit('setUser', null)
     commit('setAdmin', false)
     router.push('/')
   },
-  translateError ({commit, state}, payload) {
+  translateError ({ commit, state }, payload) {
     if (payload.code === 'auth/wrong-password') {
       commit('setError', 'Senha inválida ou usuário não tem senha cadastrada.')
     } else if (payload.code === 'auth/user-not-found') {

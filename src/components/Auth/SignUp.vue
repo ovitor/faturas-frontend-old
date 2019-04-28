@@ -91,7 +91,8 @@ export default {
           duration: 5000,
           message: 'As senhas não conferem.',
           position: 'is-bottom-right',
-          type: 'is-danger'})
+          type: 'is-danger'
+        })
         return
       }
       this.$store.dispatch('userSignUp', { name: this.name, email: this.email, password: this.password })

@@ -31,7 +31,7 @@ export const store = new Vuex.Store({
   },
 
   actions: {
-    setAppConfiguration ({commit, state}, payload) {
+    setAppConfiguration ({ commit, state }, payload) {
       database().ref('app-configurations')
         .update({
           title: state.app_title,

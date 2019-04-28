@@ -65,13 +65,13 @@
 				        <li class="list-group-item">
 				          <b>Taxa de entrega:</b> <p class="is-pulled-right">R$ 0,00</p>
 				        </li>
-				        <li class="list-group-item">
-				          <b>Total:</b> <p class="is-pulled-right"><b>R$ 582,54</b></p>
-				        </li>
-			        </ul>
+                <li class="list-group-item">
+                  <b>Total:</b> <p class="is-pulled-right"><b>R$ 582,54</b></p>
+                </li>
+              </ul>
             </div> <!-- is-3 -->
           </div> <!-- columns -->
-				</div>
+        </div>
         <div style="padding-bottom:40px;"></div>
 
       </div> <!-- container -->
@@ -82,7 +82,7 @@
           <b-button type="is-success">Enviar por e-mail</b-button>
         </div> <!-- box-footer -->
       </div> <!-- box without border -->
-		</div>
+    </div>
 
   </div>
 </template>
@@ -90,7 +90,6 @@
 <script>
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
-import html2canvas from 'html2canvas'
 
 export default {
   name: 'InvoiceShow',
@@ -105,17 +104,17 @@ export default {
         { 'item': 6, 'identification': '038', 'description': 'Elit Lorem ipsum Adipiscing elit ipsum', 'quantity': '10', 'unit_value': '10,00', 'value': '100,00' },
         { 'item': 7, 'identification': '017', 'description': 'Lorem ipsum dolor', 'quantity': '8', 'unit_value': '18,00', 'value': '144,00' },
         { 'item': 8, 'identification': '001', 'description': 'Consectetur adipiscing elit', 'quantity': '10', 'unit_value': '31,00', 'value': '310,00' },
-        { 'item': 9, 'identification': '024', 'description': 'Lorem ipsum dolor sit adipiscing elit', 'quantity': '12', 'unit_value': '20,40', 'value': '244,80' },
+        { 'item': 9, 'identification': '024', 'description': 'Lorem ipsum dolor sit adipiscing elit', 'quantity': '12', 'unit_value': '20,40', 'value': '244,80' }
         // { 'item': 10, 'identification': '008', 'description': 'Dolor sit adipiscing elit Lorem ipsum', 'quantity': '22', 'unit_value': '10,00', 'value': '220,00' },
         // { 'item': 11, 'identification': '007', 'description': 'Lorem ipsum dolor', 'quantity': '8', 'unit_value': '18,00', 'value': '144,00' },
         // { 'item': 12, 'identification': '023', 'description': 'Adipiscing elit ipsum', 'quantity': '14', 'unit_value': '24,50', 'value': '343,00' },
         // { 'item': 13, 'identification': '038', 'description': 'Elit Lorem ipsum Adipiscing elit ipsum', 'quantity': '10', 'unit_value': '10,00', 'value': '100,00' }
       ],
       columns: [
-        { field: 'item', label: 'Item', numeric: true},
+        { field: 'item', label: 'Item', numeric: true },
         { field: 'identification', label: 'Identificação', numeric: true },
         { field: 'description', label: 'Descrição', numeric: false },
-        { field: 'quantity', label: 'Quantidade', numeric: true},
+        { field: 'quantity', label: 'Quantidade', numeric: true },
         { field: 'unit_value', label: 'Valor Unitário', numeric: false },
         { field: 'value', label: 'Valor', numeric: false }
       ],
@@ -125,9 +124,9 @@ export default {
   },
   methods: {
     pdfVariables () {
-      if (this.pdfColumns.length !== 0) return;
+      if (this.pdfColumns.length !== 0) return
       for (let e in this.columns) {
-        if (e == this.columns.length) break;
+        if (e === this.columns.length) break
         this.pdfColumns.push(this.columns[e]['label'])
       }
       for (let e in this.data) {
@@ -148,11 +147,11 @@ export default {
         orientation: 'portrait'
       })
 
-      var pageSize = doc.internal.pageSize;
-      var pageWidth = pageSize.width ? pageSize.width : pageSize.getWidth();
+      var pageSize = doc.internal.pageSize
+      var pageWidth = pageSize.width ? pageSize.width : pageSize.getWidth()
 
-      doc.setFontSize(18);
-      doc.text('Faturas', 14, 22);
+      doc.setFontSize(18)
+      doc.text('Faturas', 14, 22)
 
       var generalInfo = 'Gerada em 28/04/2019\nFatura #301\nNúmero do pedido: 12'
       var provider = 'De\nFoo Company\nRua Foo, 32\nFortaleza, CE - 60.115-191\nTelefone: (85) 3231 0925\nE-mail: contact@foo.com'
@@ -160,22 +159,22 @@ export default {
       var valueInfo = 'Subtotal: R$ 2.015,00\nTaxa de entrega: R$ 0,00\n\nTotal: R$ 2.015,00'
 
       // header
-      doc.setFontSize(11);
-      doc.setTextColor(100);
-      doc.setFontStyle('bold');
+      doc.setFontSize(11)
+      doc.setTextColor(100)
+      doc.setFontStyle('bold')
 
-      doc.text(generalInfo, pageWidth - 14, 22, 'right');
+      doc.text(generalInfo, pageWidth - 14, 22, 'right')
 
-      doc.setFontStyle('normal');
+      doc.setFontStyle('normal')
 
-      var provider_text= doc.splitTextToSize(provider,  pageWidth - 35, {})
-      var client_text = doc.splitTextToSize(client, pageWidth - 35, {})
-      var valueInfo_text= doc.splitTextToSize(valueInfo, pageWidth - 35, {})
+      var providerText = doc.splitTextToSize(provider, pageWidth - 35, {})
+      var clientText = doc.splitTextToSize(client, pageWidth - 35, {})
+      var valueInfoText = doc.splitTextToSize(valueInfo, pageWidth - 35, {})
 
-      doc.text(provider_text, 14, 35)
-      doc.text(client_text, 14, 65)
+      doc.text(providerText, 14, 35)
+      doc.text(clientText, 14, 65)
 
-      doc.setFontSize(18);
+      doc.setFontSize(18)
       doc.text('Relação de Itens', pageWidth - (pageWidth / 2), 100, 'center')
 
       doc.autoTable({
@@ -191,26 +190,13 @@ export default {
         }
       })
 
-      doc.setFontSize(11);
-      doc.setTextColor(100);
-      doc.text(valueInfo_text, pageWidth - 14, doc.autoTable.previous.finalY + 10, 'right');
+      doc.setFontSize(11)
+      doc.setTextColor(100)
+      doc.text(valueInfoText, pageWidth - 14, doc.autoTable.previous.finalY + 10, 'right')
 
-      doc.output("dataurlnewwindow");
+      doc.output('dataurlnewwindow')
       // doc.save('a4.pdf')
-
-      // var elem = document.getElementsByClassName('box-content')[0]
-      // html2canvas(document.body)
-      //  .then(function (canvas) {
-      //    var img = canvas.toDataURL("image/png")
-      //    doc.addImage(img, "JPEG", 20, 20)
-      //    doc.save('a4.pdf')
-      //  })
     }
-
-      // const contentHtml = this.$refs.pdf.innerHTML
-      // doc.table(10, 10, this.data, this.pdfColumns)
-      // doc.save('sample.pdf')
-    // }
   }
 }
 </script>
