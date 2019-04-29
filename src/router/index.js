@@ -19,7 +19,7 @@ export default new Router({
     // invoice routes
     { path: '/invoice', name: 'invoice', component: InvoiceIndex },
     // { path: '/invoice/create', name: 'invoicecreate', component: InvoiceCreate },
-    { path: '/invoice/show/', name: 'invoiceshow', component: InvoiceShow },
+    { path: '/invoice/show/', name: 'invoiceshow', component: InvoiceShow }
     // { path: '/invoice/update/<id>', name: 'invoiceupdate', component: InvoiceUpdate },
     // { path: '/invoice/delete/<id>', name: 'invoicedelete', component: InvoiceDelete }
 

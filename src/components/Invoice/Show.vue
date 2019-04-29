@@ -1,70 +1,69 @@
 <template>
   <div id="invoice-show">
     <div class="container">
-			<div class="box box-good is-shadowless" ref="pdf">
-				<div class="box-header">
-					<div class="columns is-mobile">
-						<div class="column is-6">
-							<div class="shadow large">Faturas</div>
-						</div>
-						<div class="column is-6">
-							<p class="has-text-right">Gerado em: 04/04/2019</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="box-content">
-					<div class="columns is-mobile">
-						<div class="column is-7">
-							<address class="content">
-					      De
-				        <strong>Foo Company</strong><br>
-					      Rua Foo, 322.<br>
-					      Fortaleza, CE - 60.115-191<br>
-					      Telefone: (85) 3231-0926<br>
-					      Email: contact@foo.com
-					    </address>
-						</div>
-						<div class="column is-5">
-							<div class="content has-text-right">
-					      <b>Fatura #301</b><br>
-					      <b>Identificação do pedido:</b> 10<br>
-					    </div>
-						</div>
-					</div>
-					<div class="columns">
-						<div class="column is-12">
-							<address class="content">
-					      Para
-					      <strong>ACME ltda</strong><br>
-					      Rua ACME, 1703<br>
-					      Fortaleza, CE 60.140-320<br>
-					      Telefone: (85) 3401-2201<br>
-					      Responsável: Fulano Acme (fulano@acme.br)
-					    </address>
-						</div>
-					</div>
-					<div class="columns">
-						<div class="column is-12">
-							<div class="table" ref="table">
+      <div class="box box-good is-shadowless" ref="pdf">
+        <div class="box-header">
+          <div class="columns is-mobile">
+            <div class="column is-6">
+              <div class="shadow large">Faturas</div>
+            </div>
+            <div class="column is-6">
+              <p class="has-text-right">Gerado em: 04/04/2019</p>
+            </div>
+          </div>
+        </div>
+        <div class="box-content">
+          <div class="columns is-mobile">
+            <div class="column is-7">
+              <address class="content">
+                De
+                <strong>Foo Company</strong><br>
+                Rua Foo, 322.<br>
+                Fortaleza, CE - 60.115-191<br>
+                Telefone: (85) 3231-0926<br>
+                Email: contact@foo.com
+              </address>
+            </div>
+            <div class="column is-5">
+              <div class="content has-text-right">
+                <b>Fatura #301</b><br>
+                <b>Identificação do pedido:</b> 10<br>
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-12">
+              <address class="content">
+                Para
+                <strong>ACME ltda</strong><br>
+                Rua ACME, 1703<br>
+                Fortaleza, CE 60.140-320<br>
+                Telefone: (85) 3401-2201<br>
+                Responsável: Fulano Acme (fulano@acme.br)
+              </address>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-12">
+              <div class="table" ref="table">
                 <b-table :data="data" :columns="columns"></b-table>
-							</div>
-						</div>
-					</div>
-					<div class="columns">
-						<div class="column is-8">
+              </div>
+            </div>
+          </div>
+          <div class="columns">
+            <div class="column is-8">
               <b-notification type="is-info" :closable="false" has-icon>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce id fermentum quam. Proin sagittis, nibh id hendrerit imperdiet, elit sapien laoreet elit
               </b-notification>
-						</div>
-						<div class="column is-4" ref="results">
-							<ul class="list-group">
-				        <li class="list-group-item">
-				          <b>Subtotal:</b> <p class="is-pulled-right">R$ 554,80</p>
-				        </li>
-				        <li class="list-group-item">
-				          <b>Taxa de entrega:</b> <p class="is-pulled-right">R$ 0,00</p>
-				        </li>
+            </div>
+            <div class="column is-4" ref="results">
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <b>Subtotal:</b> <p class="is-pulled-right">R$ 554,80</p>
+                </li>
+                <li class="list-group-item">
+                  <b>Taxa de entrega:</b> <p class="is-pulled-right">R$ 0,00</p>
+                </li>
                 <li class="list-group-item">
                   <b>Total:</b> <p class="is-pulled-right"><b>R$ 582,54</b></p>
                 </li>
